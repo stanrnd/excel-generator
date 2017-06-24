@@ -1,2 +1,2 @@
-# easy-excel
-Easy Excel
+# Easy Excel
+POJO Based Excel Generator

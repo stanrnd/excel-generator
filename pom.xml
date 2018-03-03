@@ -3,13 +3,13 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.stanslab.excel</groupId>
-	<artifactId>easy-excel</artifactId>
-	<version>1.0</version>
+	<artifactId>pojo-excel</artifactId>
+	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>easy-excel</name>
-	<description>POJO Based Excel Generator</description>
-	<url>https://github.com/stanslab/easy-excel</url>
+	<name>pojo-excel</name>
+	<description>POJO Based Excel Converter</description>
+	<url>https://github.com/stanslab/pojo-excel</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -26,6 +26,11 @@
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
 			<version>3.16</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.ow2.asm</groupId>
+		    <artifactId>asm</artifactId>
+		    <version>6.0</version>
 		</dependency>
 	</dependencies>
 
@@ -139,9 +144,9 @@
 	</developers>
 
 	<scm>
-		<connection>scm:git:git://github.com/stanslab/easy-excel.git</connection>
-		<developerConnection>scm:git:ssh://github.com:stanslab/easy-excel.git</developerConnection>
-		<url>http://github.com/stanslab/easy-excel/tree/master</url>
+		<connection>scm:git:git://github.com/stanslab/pojo-excel.git</connection>
+		<developerConnection>scm:git:ssh://github.com:stanslab/pojo-excel.git</developerConnection>
+		<url>http://github.com/stanslab/pojo-excel/tree/master</url>
 	</scm>
 
 </project>

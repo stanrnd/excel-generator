@@ -1,2 +1,2 @@
-# Easy Excel
-POJO Based Excel Generator
+# POJO Excel Converter
+Java POJO Based Excel Converter

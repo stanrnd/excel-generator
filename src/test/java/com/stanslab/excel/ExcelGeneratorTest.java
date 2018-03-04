@@ -17,13 +17,19 @@ public class ExcelGeneratorTest {
 		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 		assert classLoader != null;
 		String path = "com.stanslab.excel".replace('.', '/');
+		System.out.println(path);
 		Enumeration resources = classLoader.getResources(path);
-		List dirs = new ArrayList();
+		List<File> dirs = new ArrayList();
 		while (resources.hasMoreElements()) {
 			URL resource = (URL) resources.nextElement();
 			dirs.add(new File(resource.getFile()));
 		}
-		System.out.println(dirs);
+		ArrayList classes = new ArrayList();
+		for (File directory : dirs) {
+			classes.addAll(findClasses(directory, "com.stanslab.excel"));
+		}
+		
+		System.out.println(classes);
 		
 		/*InputStream in=ExcelGeneratorTest.class.getResourceAsStream("/com/stanslab/excel/Student.class");
         ClassReader classReader=new ClassReader(in);
@@ -45,7 +51,7 @@ public class ExcelGeneratorTest {
 			classes.addAll(findClasses(directory, packageName));
 		}
 		return classes.toArray(new Class[classes.size()]);
-	}
+	}*/
 
 	private static List findClasses(File directory, String packageName) throws ClassNotFoundException {
 		List classes = new ArrayList();
@@ -62,6 +68,6 @@ public class ExcelGeneratorTest {
 			}
 		}
 		return classes;
-	}*/
+	}
 
 }

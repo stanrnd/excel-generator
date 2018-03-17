@@ -1,44 +1,25 @@
 package com.stanslab.excel;
 
 import com.stanslab.excel.annotation.ExcelColumn;
-import com.stanslab.excel.annotation.ExcelHeader;
 import com.stanslab.excel.annotation.ExcelRow;
 
-@ExcelRow(height = 50)
-@ExcelHeader(value = "Student Details", height = 50)
-public class Student {
+@ExcelRow(height = 30)
+public class Student extends User {
 	
-	@ExcelColumn("Name")
-	private String name;
+	@ExcelColumn("Department")
+	private String department;
+
+	public Student(String id, String name, int age, String address, String department) {
+		super(id, name, age, address);
+		this.department = department;
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
 	
-	@ExcelColumn("Age")
-	private int age;
-	
-	@ExcelColumn(value = "Address", width = 1000)
-	private String address;
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
 }

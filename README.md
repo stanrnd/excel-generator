@@ -1,2 +1,2 @@
-# POJO Excel Converter
-Java POJO Based Excel Converter
+# Excel Generator
+Generating Excel from POJO

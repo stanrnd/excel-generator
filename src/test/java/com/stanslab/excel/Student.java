@@ -1,19 +1,22 @@
 package com.stanslab.excel;
 
-import com.stanslab.excel.annotation.ExcelColumn;
-import com.stanslab.excel.annotation.ExcelRow;
+import com.stanslab.excel.annotation.Column;
+import com.stanslab.excel.annotation.Data;
+import com.stanslab.excel.annotation.Header;
+import com.stanslab.excel.annotation.Sheet;
+import com.stanslab.excel.annotation.Title;
 
-@ExcelRow(height = 30)
+@Sheet("Student Sheet")
 public class Student extends User {
 	
-	@ExcelColumn("Department")
+	@Column
 	private String department;
 
 	public Student(String id, String name, int age, String address, String department) {
 		super(id, name, age, address);
 		this.department = department;
 	}
-
+	
 	public String getDepartment() {
 		return department;
 	}

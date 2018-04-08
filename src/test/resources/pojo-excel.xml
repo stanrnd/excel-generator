@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<sheets>
+	<sheet name="Student Sheet" class="com.stanslab.excel.Student">
+		<title text="Student Details" height="20" foreground="BLACK" background="WHITE" font-name="ARIAL" font-size="5" italic="false" bold="true" />
+		<columns>
+			<column field-name="name" width="200" order="0">
+				<header text="Name" height="20" foreground="BLACK" background="WHITE" font-name="ARIAL" font-size="5" italic="false" bold="true" />
+				<data height="20" foreground="BLACK" background="WHITE" font-name="ARIAL" font-size="5" italic="false" bold="true" />
+			</column>
+			<column field-name="address" width="200" order="0">
+				<header text="Address" height="20" foreground="BLACK" background="WHITE" font-name="ARIAL" font-size="5" italic="false" bold="true" />
+				<data height="20" foreground="BLACK" background="WHITE" font-name="ARIAL" font-size="5" italic="false" bold="true" />
+			</column>
+			<column field-name="department" width="200" order="0">
+				<header text="Department" height="20" foreground="BLACK" background="WHITE" font-name="ARIAL" font-size="5" italic="false" bold="true" />
+				<data height="20" foreground="BLACK" background="WHITE" font-name="ARIAL" font-size="5" italic="false" bold="true" />
+			</column>
+		</columns>
+	</sheet>
+</sheets>

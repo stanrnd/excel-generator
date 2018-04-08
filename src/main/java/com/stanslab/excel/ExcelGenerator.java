@@ -2,12 +2,19 @@ package com.stanslab.excel;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 final public class ExcelGenerator {
 	
+	final public static byte[] generate(ExcelType excelType, Sheet ... sheets) {
+		
+		return null;
+	}
+	
 	final public static byte[] generate(ExcelSheet sheet, ExcelType excelType) {
+		generate(ExcelType.XLS, new Sheet(String.class, new ArrayList<String>()), new Sheet(Integer.class, new ArrayList<Integer>()));
 		byte[] bytes = excelType.getExcelBuilder().build(Arrays.asList(sheet));
 		
 		return bytes;

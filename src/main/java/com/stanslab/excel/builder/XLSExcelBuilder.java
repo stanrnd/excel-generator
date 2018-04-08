@@ -21,8 +21,8 @@ import org.apache.poi.ss.util.RegionUtil;
 import com.stanslab.excel.ExcelSheet;
 import com.stanslab.excel.builder.ExcelBuilder;
 import com.stanslab.excel.meta.ColumnMeta;
-import com.stanslab.excel.meta.ExcelMeta;
-import com.stanslab.excel.meta.ExcelMetaFactory;
+import com.stanslab.excel.meta.ExcelSheet;
+import com.stanslab.excel.meta.SheetMetaFactory;
 import com.stanslab.excel.meta.RowMeta;
 
 /**
@@ -38,7 +38,7 @@ public class XLSExcelBuilder implements ExcelBuilder {
 			Workbook workbook = new HSSFWorkbook();
 			for (ExcelSheet excelSheet : excelSheets) {
 				Sheet sheet = workbook.createSheet(excelSheet.getName());
-				ExcelMeta excelMeta = ExcelMetaFactory.get(excelSheet.getRowType());
+				Sheet excelMeta = SheetMetaFactory.get(excelSheet.getRowType());
 				build(workbook, sheet, excelSheet, excelMeta);
 			}
 			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -50,7 +50,7 @@ public class XLSExcelBuilder implements ExcelBuilder {
 		}
 	}
 
-	private void build(Workbook workbook, Sheet sheet, ExcelSheet excelSheet, ExcelMeta excelMeta) {
+	private void build(Workbook workbook, Sheet sheet, ExcelSheet excelSheet, Sheet excelMeta) {
 		RowMeta rowMeta = excelMeta.getRowMeta();
 		
 		int rowNumber = -1;

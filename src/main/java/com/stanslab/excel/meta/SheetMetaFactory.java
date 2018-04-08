@@ -10,17 +10,17 @@ import com.stanslab.excel.meta.parser.ExcelMetaParser;
  * @author Stalin
  *
  */
-public class ExcelMetaFactory {
+public class SheetMetaFactory {
 	
-	private static Map<Class<?>, ExcelMeta> metas = new HashMap<>();
+	private static Map<Class<?>, ExcelSheet> metas = new HashMap<>();
 	
 	
-	public static ExcelMeta get(Class<?> clazz) {
+	public static ExcelSheet get(Class<?> clazz) {
 		if(metas.containsKey(clazz)) {
 			return metas.get(clazz);
 		}
 		
-		ExcelMeta excelMeta;
+		ExcelSheet excelMeta;
 		metas.put(clazz, excelMeta = ExcelMetaParser.parseExcelMeta(clazz));
 		
 		return excelMeta;

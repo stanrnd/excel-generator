@@ -1,8 +1,13 @@
 package com.stanslab.excel.meta;
 
 import com.stanslab.excel.annotation.Column;
-import com.stanslab.excel.pojo.parser.ValueParser;
+import com.stanslab.excel.parser.bean.ValueParser;
 
+/**
+ * 
+ * @author Stalin
+ *
+ */
 public class ExcelColumn {
 	
 	private int width;
@@ -13,6 +18,8 @@ public class ExcelColumn {
 	
 	private ExcelData data;
 	
+	private ValueParser valueParser;
+	
 	public ExcelColumn() {
 		
 	}
@@ -21,7 +28,8 @@ public class ExcelColumn {
 		this.width = column.width();
 		this.order = column.order();
 		this.header = new ExcelHeader(column.header());
-		this.data = new ExcelData(column.data(), valueParser);
+		this.data = new ExcelData(column.data());
+		this.valueParser = valueParser;
 	}
 
 	public ExcelHeader getHeader() {
@@ -54,6 +62,14 @@ public class ExcelColumn {
 
 	public void setOrder(int order) {
 		this.order = order;
+	}
+
+	public ValueParser getValueParser() {
+		return valueParser;
+	}
+
+	public void setValueParser(ValueParser valueParser) {
+		this.valueParser = valueParser;
 	}
 
 }

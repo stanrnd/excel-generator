@@ -1,4 +1,4 @@
-package com.stanslab.excel.pojo.parser;
+package com.stanslab.excel.parser.bean;
 
 /**
  * 

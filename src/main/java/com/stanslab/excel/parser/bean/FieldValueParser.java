@@ -1,4 +1,4 @@
-package com.stanslab.excel.pojo.parser;
+package com.stanslab.excel.parser.bean;
 
 import java.lang.reflect.Field;
 
@@ -12,6 +12,9 @@ public class FieldValueParser implements ValueParser {
 	private Field field;
 
 	public FieldValueParser(Field field) {
+		if(!field.isAccessible()) {
+			field.setAccessible(true);
+		}
 		this.field = field;
 	}
 

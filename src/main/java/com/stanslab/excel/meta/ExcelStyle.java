@@ -1,5 +1,10 @@
 package com.stanslab.excel.meta;
 
+/**
+ * 
+ * @author Stalin
+ *
+ */
 abstract public class ExcelStyle {
 	
 	protected int height;

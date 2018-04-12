@@ -1,8 +1,6 @@
 package com.stanslab.excel.builder;
 
-import java.util.List;
-
-import com.stanslab.excel.ExcelSheet;
+import com.stanslab.excel.Sheet;
 
 /**
  * 
@@ -11,6 +9,6 @@ import com.stanslab.excel.ExcelSheet;
  */
 public interface ExcelBuilder {
 	
-	public byte[] build(List<ExcelSheet> excelSheets);
+	public byte[] build(Sheet[] sheets);
 
 }

@@ -2,6 +2,11 @@ package com.stanslab.excel.meta;
 
 import com.stanslab.excel.annotation.Title;
 
+/**
+ * 
+ * @author Stalin
+ *
+ */
 public class ExcelTitle extends ExcelStyle {
 	
 	private String text;

@@ -1,18 +1,19 @@
 package com.stanslab.excel.meta;
 
 import com.stanslab.excel.annotation.Data;
-import com.stanslab.excel.pojo.parser.ValueParser;
 
+/**
+ * 
+ * @author Stalin
+ *
+ */
 public class ExcelData extends ExcelStyle {
-	
-	private ValueParser valueParser;
 	
 	public ExcelData() {
 		
 	}
 
-	public ExcelData(Data data, ValueParser valueParser) {
-		this.valueParser = valueParser;
+	public ExcelData(Data data) {
 		this.background = data.background();
 		this.bold = data.bold();
 		this.fontName = data.fontName();
@@ -21,14 +22,6 @@ public class ExcelData extends ExcelStyle {
 		this.height = data.height();
 		this.italic = data.italic();
 		this.underline = data.underline();
-	}
-
-	public ValueParser getValueParser() {
-		return valueParser;
-	}
-
-	public void setValueParser(ValueParser valueParser) {
-		this.valueParser = valueParser;
 	}
 	
 }

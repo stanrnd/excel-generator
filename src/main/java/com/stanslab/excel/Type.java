@@ -10,13 +10,13 @@ import com.stanslab.excel.builder.XLSXExcelBuilder;
  * @author Stalin
  *
  */
-public enum ExcelType {
+public enum Type {
 	
 	XLS(new XLSExcelBuilder()), XLSX(new XLSXExcelBuilder()), CSV(new CSVExcelBuilder());
 
 	private ExcelBuilder excelBuilder;
 	
-	private ExcelType(ExcelBuilder excelBuilder) {
+	private Type(ExcelBuilder excelBuilder) {
 		this.excelBuilder = excelBuilder;
 	}
 	

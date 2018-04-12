@@ -18,12 +18,11 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.RegionUtil;
 
-import com.stanslab.excel.ExcelSheet;
 import com.stanslab.excel.builder.ExcelBuilder;
-import com.stanslab.excel.meta.ColumnMeta;
+import com.stanslab.excel.meta.ExcelColumn;
 import com.stanslab.excel.meta.ExcelSheet;
-import com.stanslab.excel.meta.SheetMetaFactory;
-import com.stanslab.excel.meta.RowMeta;
+import com.stanslab.excel.meta.ExcelSheetFactory;
+import com.stanslab.excel.meta.ExcelTitle;
 
 /**
  * 
@@ -33,13 +32,12 @@ import com.stanslab.excel.meta.RowMeta;
 public class XLSExcelBuilder implements ExcelBuilder {
 
 	@Override
-	public byte[] build(List<ExcelSheet> excelSheets) {
+	public byte[] build(com.stanslab.excel.Sheet[] sheetDatas) {
 		try {
 			Workbook workbook = new HSSFWorkbook();
-			for (ExcelSheet excelSheet : excelSheets) {
-				Sheet sheet = workbook.createSheet(excelSheet.getName());
-				Sheet excelMeta = SheetMetaFactory.get(excelSheet.getRowType());
-				build(workbook, sheet, excelSheet, excelMeta);
+			for (com.stanslab.excel.Sheet sheetData : sheetDatas) {
+				ExcelSheet excelSheet = ExcelSheetFactory.get(sheetData.getClazz());
+				build(workbook, excelSheet, sheetData.getData());
 			}
 			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 			workbook.write(outputStream);
@@ -50,44 +48,45 @@ public class XLSExcelBuilder implements ExcelBuilder {
 		}
 	}
 
-	private void build(Workbook workbook, Sheet sheet, ExcelSheet excelSheet, Sheet excelMeta) {
-		RowMeta rowMeta = excelMeta.getRowMeta();
+	private void build(Workbook workbook, ExcelSheet excelSheet, List<?> rowDatas) {
+		Sheet sheet = workbook.createSheet(excelSheet.getName());
 		
 		int rowNumber = -1;
 		int columnNumber = -1;
 		
+		List<ExcelColumn> excelColumns = excelSheet.getColumns();
+		
+		ExcelTitle excelTitle = excelSheet.getTitle();
 		Row titleRow = sheet.createRow(++rowNumber);
-		titleRow.setHeightInPoints(rowMeta.getHeight());
+		titleRow.setHeightInPoints(excelTitle.getHeight());
 		Cell titleCell = titleRow.createCell(++columnNumber);
-		titleCell.setCellValue(excelSheet.getTitle());
+		titleCell.setCellValue(excelTitle.getText());
 		titleCell.setCellStyle(getTitleCellStyle(workbook));
-		if(excelMeta.getColumnMetas().size() > 1) {
-			CellRangeAddress cellRangeAddress = new CellRangeAddress(0, 0, 0, excelMeta.getColumnMetas().size()-1);
+		if(excelColumns.size() > 1) {
+			CellRangeAddress cellRangeAddress = new CellRangeAddress(0, 0, 0, excelColumns.size()-1);
 			sheet.addMergedRegion(cellRangeAddress);
 		}
 		
 		columnNumber = -1;
 		Row headerRow = sheet.createRow(++rowNumber);
-		headerRow.setHeightInPoints(rowMeta.getHeight());
-		for (ColumnMeta columnMeta : excelMeta.getColumnMetas()) {
+		float maxHeaderHeight = 0;
+		for (ExcelColumn excelColumn : excelColumns) {
 			Cell cell = headerRow.createCell(++columnNumber);
-			cell.setCellValue(columnMeta.getName());
+			cell.setCellValue(excelColumn.getHeader().getText());
 			cell.setCellStyle(getHeaderCellStyle(workbook));
-			if(columnMeta.getWidth() == -1) {
-				sheet.autoSizeColumn(columnNumber, true);
-			} else {
-				sheet.setColumnWidth(columnNumber, columnMeta.getWidth());
+			sheet.setColumnWidth(columnNumber, excelColumn.getWidth());
+			if(maxHeaderHeight < excelColumn.getHeader().getHeight()) {
+				maxHeaderHeight = excelColumn.getHeader().getHeight();
 			}
 		}
+		headerRow.setHeightInPoints(maxHeaderHeight);
 		
-		List<?> rows = excelSheet.getRows();
-		for(Object excelRow:rows) {
+		for(Object rowData:rowDatas) {
 			Row row = sheet.createRow(++rowNumber);
-			row.setHeightInPoints(rowMeta.getHeight());
 			columnNumber = -1;
-			for (ColumnMeta columnMeta : excelMeta.getColumnMetas()) {
+			for (ExcelColumn excelColumn : excelColumns) {
 				Cell cell = row.createCell(++columnNumber);
-				Object value = columnMeta.getValue(excelRow);
+				Object value = excelColumn.getValueParser().parse(rowData);
 				if(value instanceof String) {
 					cell.setCellValue((String) value);
 				} else {
@@ -96,7 +95,7 @@ public class XLSExcelBuilder implements ExcelBuilder {
 			}
 		}
 		
-		setBorder(sheet, rows.size(), excelMeta.getColumnMetas().size());
+		setBorder(sheet, rowDatas.size(), excelColumns.size());
 	}
 	
 	private CellStyle getTitleCellStyle(Workbook workbook) {

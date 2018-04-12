@@ -1,8 +1,6 @@
 package com.stanslab.excel.builder;
 
-import java.util.List;
-
-import com.stanslab.excel.ExcelSheet;
+import com.stanslab.excel.Sheet;
 import com.stanslab.excel.builder.ExcelBuilder;
 
 /**
@@ -13,9 +11,7 @@ import com.stanslab.excel.builder.ExcelBuilder;
 public class CSVExcelBuilder implements ExcelBuilder {
 
 	@Override
-	public byte[] build(List<ExcelSheet> excelSheets) {
-		
-		
+	public byte[] build(Sheet[] sheets) {
 		
 		return null;
 	}

@@ -1,19 +1,18 @@
 package com.stanslab.excel;
 
-import com.stanslab.excel.annotation.ExcelColumn;
-import com.stanslab.excel.annotation.ExcelRow;
+import com.stanslab.excel.annotation.Column;
 import com.stanslab.excel.annotation.Ignore;
 
 public class User {
 	
 	private String id;
 
-	@ExcelColumn(value = "Name", order = 6)
+	@Column
 	private String name;
 	
 	private int age;
 	
-	@ExcelColumn(value = "Address", width = 5000, order = 5)
+	@Column
 	private String address;
 
 	public User(String id, String name, int age, String address) {
@@ -39,7 +38,7 @@ public class User {
 		this.name = name;
 	}
 
-	@ExcelColumn("Age")
+	@Column
 	public int getAge() {
 		return age;
 	}

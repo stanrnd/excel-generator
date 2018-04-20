@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <sheets>
-	<sheet name="Student Sheet" class="com.stanslab.excel.Student">
+	<sheet name="Student Sheet" class="com.stanrnd.excel.Student">
 		<title text="Student Details" height="20" foreground="BLACK" background="WHITE" font-name="ARIAL" font-size="5" italic="false" bold="true" />
 		<columns>
 			<column field-name="name" width="200" order="0">

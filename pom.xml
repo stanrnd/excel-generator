@@ -2,14 +2,14 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.stanslab.excel</groupId>
+	<groupId>com.stanrnd.excel</groupId>
 	<artifactId>excel-generator</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>pojo-excel</name>
+	<name>excel-generator</name>
 	<description>POJO Based Excel Converter</description>
-	<url>https://github.com/stanslab/pojo-excel</url>
+	<url>https://github.com/stanrnd/excel-generator</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -133,15 +133,15 @@
 		<developer>
 			<name>Stalin Jeyaraj</name>
 			<email>path2stalin@gmail.com</email>
-			<organization>Stans Lab</organization>
-			<organizationUrl>http://www.stanslab.com</organizationUrl>
+			<organization>Stan R&amp;D</organization>
+			<organizationUrl>http://www.stanrnd.com</organizationUrl>
 		</developer>
 	</developers>
 
 	<scm>
-		<connection>scm:git:git://github.com/stanslab/pojo-excel.git</connection>
-		<developerConnection>scm:git:ssh://github.com:stanslab/pojo-excel.git</developerConnection>
-		<url>http://github.com/stanslab/pojo-excel/tree/master</url>
+		<connection>scm:git:git://github.com/stanrnd/excel-generator.git</connection>
+		<developerConnection>scm:git:ssh://github.com:stanrnd/excel-generator.git</developerConnection>
+		<url>http://github.com/stanrnd/excel-generator/tree/master</url>
 	</scm>
 
 </project>

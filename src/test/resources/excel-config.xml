@@ -1,20 +1,28 @@
 <?xml version="1.0"?>
 <sheets>
-	<sheet name="Student Sheet" class="com.stanrnd.excel.Student">
-		<title text="Student Details" height="20" foreground="BLACK" background="WHITE" font-name="ARIAL" font-size="5" italic="false" bold="true" />
+
+	<sheet name="Employee Sheet" class="com.stanrnd.excel.xml.Employee">
+		<title text="Employee Details" foreground="GREEN" />
 		<columns>
-			<column field-name="name" width="200" order="0">
-				<header text="Name" height="20" foreground="BLACK" background="WHITE" font-name="ARIAL" font-size="5" italic="false" bold="true" />
-				<data height="20" foreground="BLACK" background="WHITE" font-name="ARIAL" font-size="5" italic="false" bold="true" />
+			<column field-name="name" />
+			<column field-name="address" width="200" />
+			<column field-name="department" order="3">
+				<header text="Department" />
 			</column>
-			<column field-name="address" width="200" order="0">
-				<header text="Address" height="20" foreground="BLACK" background="WHITE" font-name="ARIAL" font-size="5" italic="false" bold="true" />
-				<data height="20" foreground="BLACK" background="WHITE" font-name="ARIAL" font-size="5" italic="false" bold="true" />
-			</column>
-			<column field-name="department" width="200" order="0">
-				<header text="Department" height="20" foreground="BLACK" background="WHITE" font-name="ARIAL" font-size="5" italic="false" bold="true" />
-				<data height="20" foreground="BLACK" background="WHITE" font-name="ARIAL" font-size="5" italic="false" bold="true" />
+			<column field-name="department">
+				<header text="Department" underline="true" />
+				<data foreground="RED" background="YELLOW" bold="true" />
 			</column>
 		</columns>
 	</sheet>
+	
+	<sheet name="Project Sheet" class="com.stanrnd.excel.xml.Project">
+		<title text="Project Details" />
+		<columns>
+			<column field-name="name" />
+			<column field-name="technology" />
+			<column field-name="clients" />
+		</columns>
+	</sheet>
+	
 </sheets>

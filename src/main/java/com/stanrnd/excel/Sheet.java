@@ -13,10 +13,6 @@ public class Sheet {
 	
 	private List<?> data;
 
-	public Sheet(Class<?> clazz) {
-		this.clazz = clazz;
-	}
-
 	public Sheet(Class<?> clazz, List<?> data) {
 		this.clazz = clazz;
 		this.data = data;

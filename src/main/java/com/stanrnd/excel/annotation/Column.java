@@ -18,7 +18,7 @@ public @interface Column {
 	
 	public int order() default 0;
 	
-	public Header header() default @Header(value = "");
+	public Header header() default @Header;
 	
 	public Data data() default @Data;
 	

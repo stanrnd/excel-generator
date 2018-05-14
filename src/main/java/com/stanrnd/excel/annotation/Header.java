@@ -18,7 +18,7 @@ import com.stanrnd.excel.meta.FontSize;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Header {
 
-	public String value();
+	public String value() default "";
 	
 	public int height() default 20;
 	

@@ -5,3 +5,5 @@ Excel Generator is a framework to generate excel files (.xls, .xlsx and .csv) fr
 
 #### Examples ####
 Please refer these files [AnnotationTest.java](https://github.com/stanrnd/excel-generator/blob/master/src/test/java/com/stanrnd/excel/annotation/AnnotationTest.java), [XmlTest.java](https://github.com/stanrnd/excel-generator/blob/master/src/test/java/com/stanrnd/excel/xml/XmlTest.java) and [excel-config.xml](https://github.com/stanrnd/excel-generator/blob/master/src/test/resources/excel-config.xml)
+
+Proper documentation will be avaialble soon..

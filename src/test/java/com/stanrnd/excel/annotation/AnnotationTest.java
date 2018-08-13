@@ -3,13 +3,17 @@ package com.stanrnd.excel.annotation;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.stanrnd.excel.ExcelEnvironment;
 import com.stanrnd.excel.ExcelGenerator;
 import com.stanrnd.excel.Sheet;
 import com.stanrnd.excel.Type;
+import com.stanrnd.excel.exception.ExcelException;
 
 public class AnnotationTest {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ExcelException {
+		ExcelEnvironment.init();
+		
 		List<Employee> employees = new ArrayList<>();
 		employees.add(new Employee(11, "Stalin", "Bangalore", "Engineering", 25000f));
 		employees.add(new Employee(12, "Raam", "Chennai", "IT", 20000f));

@@ -7,7 +7,7 @@ public class User {
 	@Column
 	private String name;
 	
-	@Column(width = 200)
+	@Column(width = 10000)
 	private String address;
 
 	public User(Integer id, String name, String address) {

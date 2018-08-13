@@ -20,7 +20,7 @@ public @interface Title {
 	
 	public String value();
 	
-	public int height() default 20;
+	public int height() default 350;
 	
 	public Color foreground() default Color.BLACK;
 	

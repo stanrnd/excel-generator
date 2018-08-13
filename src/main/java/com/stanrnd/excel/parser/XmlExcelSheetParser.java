@@ -17,6 +17,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.stanrnd.excel.exception.ExcelParserException;
 import com.stanrnd.excel.meta.Color;
 import com.stanrnd.excel.meta.ExcelColumn;
 import com.stanrnd.excel.meta.ExcelData;
@@ -32,7 +33,7 @@ import com.stanrnd.excel.parser.bean.ValueParser;
 
 public class XmlExcelSheetParser {
 
-	public static Map<Class<?>, ExcelSheet> parse() {
+	public static Map<Class<?>, ExcelSheet> parse() throws ExcelParserException {
 		try (InputStream inputStream = XmlExcelSheetParser.class.getResourceAsStream("/excel-config.xml")) {
 			Map<Class<?>, ExcelSheet> excelSheets = new LinkedHashMap<>();
 			DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
@@ -50,7 +51,7 @@ public class XmlExcelSheetParser {
 			}
 			return excelSheets;
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+			throw new ExcelParserException(e);
 		}
 	}
 

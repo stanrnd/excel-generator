@@ -5,11 +5,12 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import com.stanrnd.excel.ExcelEnvironment;
 import com.stanrnd.excel.Sheet;
 import com.stanrnd.excel.builder.ExcelBuilder;
+import com.stanrnd.excel.exception.ExcelBuilderException;
 import com.stanrnd.excel.meta.ExcelColumn;
 import com.stanrnd.excel.meta.ExcelSheet;
-import com.stanrnd.excel.meta.ExcelSheetFactory;
 
 /**
  * 
@@ -19,12 +20,12 @@ import com.stanrnd.excel.meta.ExcelSheetFactory;
 public class CSVExcelBuilder implements ExcelBuilder {
 
 	@Override
-	public byte[] build(Sheet[] sheets) {
+	public byte[] build(Sheet[] sheets) throws ExcelBuilderException {
 		try {
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			ZipOutputStream out = new ZipOutputStream(baos);
 			for (Sheet sheet:sheets) {
-				ExcelSheet excelSheet = ExcelSheetFactory.get(sheet.getClazz());
+				ExcelSheet excelSheet = ExcelEnvironment.getSheet(sheet.getClazz());
 				StringBuilder sheetBuilder = buildSheet(excelSheet, sheet.getData());
 				ZipEntry ze = new ZipEntry(excelSheet.getName() + ".csv");
 				out.putNextEntry(ze);
@@ -34,7 +35,7 @@ public class CSVExcelBuilder implements ExcelBuilder {
 			out.close();
 			return baos.toByteArray();
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+			throw new ExcelBuilderException(e);
 		}
 	}
 	

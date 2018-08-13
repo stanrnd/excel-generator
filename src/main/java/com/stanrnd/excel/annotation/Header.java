@@ -20,7 +20,7 @@ public @interface Header {
 
 	public String value() default "";
 	
-	public int height() default 20;
+	public int height() default 0;
 	
 	public Color foreground() default Color.BLACK;
 	

@@ -131,6 +131,18 @@ public class XmlExcelSheetParser {
 				}
 			}
 			
+			if(excelColumn.getHeader() == null) {
+				ExcelHeader excelHeader = new ExcelHeader();
+				if(column.hasAttribute("field-name")) {
+					excelHeader.setText(column.getAttribute("field-name"));
+				}
+				if(column.hasAttribute("method-name")) {
+					excelHeader.setText(column.getAttribute("method-name"));
+				}
+				
+				excelColumn.setHeader(excelHeader);
+			}
+			
 			return excelColumn;
 		} catch (Exception e) {
 			throw new RuntimeException(e);

@@ -30,9 +30,9 @@ public @interface Header {
 	
 	public FontSize fontSize() default FontSize.FIVE;
 	
-	public boolean italic() default false;
+	public boolean italic() default true;
 	
-	public boolean bold() default false;
+	public boolean bold() default true;
 	
 	public boolean underline() default false;
 	

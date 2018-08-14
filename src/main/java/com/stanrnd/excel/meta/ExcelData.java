@@ -10,7 +10,14 @@ import com.stanrnd.excel.annotation.Data;
 public class ExcelData extends ExcelStyle {
 	
 	public ExcelData() {
-		
+		this.foreground = Color.BLACK;
+		this.background = Color.WHITE;
+		this.bold = false;
+		this.fontName = FontName.ARIAL;
+		this.fontSize = FontSize.FIVE;
+		this.height = 0;
+		this.italic = false;
+		this.underline = false;
 	}
 
 	public ExcelData(Data data) {

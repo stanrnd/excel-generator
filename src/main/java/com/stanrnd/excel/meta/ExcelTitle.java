@@ -12,7 +12,15 @@ public class ExcelTitle extends ExcelStyle {
 	private String text;
 	
 	public ExcelTitle() {
-		
+		this.text = "";
+		this.foreground = Color.BLACK;
+		this.background = Color.WHITE;
+		this.bold = true;
+		this.fontName = FontName.ARIAL;
+		this.fontSize = FontSize.FIVE;
+		this.height = 0;
+		this.italic = false;
+		this.underline = false;
 	}
 
 	public ExcelTitle(Title title) {

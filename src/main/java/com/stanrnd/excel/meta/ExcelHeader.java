@@ -12,7 +12,15 @@ public class ExcelHeader extends ExcelStyle {
 	private String text;
 	
 	public ExcelHeader() {
-		
+		this.text = "";
+		this.foreground = Color.BLACK;
+		this.background = Color.WHITE;
+		this.bold = true;
+		this.fontName = FontName.ARIAL;
+		this.fontSize = FontSize.FIVE;
+		this.height = 0;
+		this.italic = true;
+		this.underline = false;
 	}
 
 	public ExcelHeader(Header header) {

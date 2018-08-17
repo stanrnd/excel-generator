@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	targetNamespace="https://raw.githubusercontent.com/stanrnd/excel-generator/master" xmlns="https://raw.githubusercontent.com/stanrnd/excel-generator/master"
+	targetNamespace="https://github.com/stanrnd/excel-generator" xmlns="https://github.com/stanrnd/excel-generator"
 	elementFormDefault="qualified">
 
 	<xs:element name="sheets">

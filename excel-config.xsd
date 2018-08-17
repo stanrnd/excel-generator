@@ -3,8 +3,6 @@
 	targetNamespace="https://github.com/stanrnd/excel-generator" xmlns="https://github.com/stanrnd/excel-generator"
 	elementFormDefault="qualified">
 	
-	<xs:import namespace="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="xsi.xsd"/>
-	
 	<xs:element name="sheets">
 		<xs:complexType>
 			<xs:sequence>

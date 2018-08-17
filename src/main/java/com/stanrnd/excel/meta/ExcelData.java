@@ -10,22 +10,26 @@ import com.stanrnd.excel.annotation.Data;
 public class ExcelData extends ExcelStyle {
 	
 	public ExcelData() {
-		this.foreground = Color.BLACK;
-		this.background = Color.WHITE;
+		this.fillForeground = Color.BLACK;
+		this.fillBackground = Color.WHITE;
+		this.fillPattern = FillPattern.NO_FILL;
 		this.bold = false;
-		this.fontName = FontName.ARIAL;
-		this.fontSize = FontSize.FIVE;
+		this.fontName = "Calibri";
+		this.fontSize = FontSize.EIGHT;
+		this.fontColor = Color.BLACK;
 		this.height = 0;
 		this.italic = false;
-		this.underline = false;
+		this.underline = 0;
 	}
 
 	public ExcelData(Data data) {
-		this.background = data.background();
+		this.fillForeground = data.fillForeground();
+		this.fillBackground = data.fillBackground();
+		this.fillPattern = data.fillPattern();
 		this.bold = data.bold();
 		this.fontName = data.fontName();
 		this.fontSize = data.fontSize();
-		this.foreground = data.foreground();
+		this.fontColor = data.fontColor();
 		this.height = data.height();
 		this.italic = data.italic();
 		this.underline = data.underline();

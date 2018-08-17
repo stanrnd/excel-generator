@@ -14,9 +14,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Column {
 
-	public int width() default 0;
+	public short width() default 0;
 	
-	public int order() default 0;
+	public short order() default 0;
 	
 	public Header header() default @Header;
 	

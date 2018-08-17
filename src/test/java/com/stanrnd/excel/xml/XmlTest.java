@@ -26,7 +26,7 @@ public class XmlTest {
 		projects.add(new Project("Billing System", "C", "Amazon"));
 		projects.add(new Project("Traffic Contoller", "C++", "Government"));
 		
-		ExcelGenerator.generate("d:/temp/software-ltd.xls", Type.XLS, new Sheet(Employee.class, employees), new Sheet(Project.class, projects));
+		ExcelGenerator.generate("d:/temp/software-ltd.xlsx", Type.XLSX, new Sheet(Employee.class, employees), new Sheet(Project.class, projects));
 		
 		System.out.println("Done !!");
 	}

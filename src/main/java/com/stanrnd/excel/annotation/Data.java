@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import com.stanrnd.excel.meta.Color;
-import com.stanrnd.excel.meta.FontName;
+import com.stanrnd.excel.meta.FillPattern;
 import com.stanrnd.excel.meta.FontSize;
 
 /**
@@ -18,20 +18,24 @@ import com.stanrnd.excel.meta.FontSize;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Data {
 
-	public int height() default 0;
+	public short height() default 0;
 	
-	public Color foreground() default Color.BLACK;
+	public Color fillForeground() default Color.BLACK;
 	
-	public Color background() default Color.WHITE;
+	public Color fillBackground() default Color.WHITE;
 	
-	public FontName fontName() default FontName.ARIAL;
+	public FillPattern fillPattern() default FillPattern.NO_FILL;
 	
-	public FontSize fontSize() default FontSize.FIVE;
+	public String fontName() default "Calibri";
+	
+	public FontSize fontSize() default FontSize.EIGHT;
+	
+	public Color fontColor() default Color.BLACK;
 	
 	public boolean italic() default false;
 	
 	public boolean bold() default false;
 	
-	public boolean underline() default false;
+	public byte underline() default 0;
 	
 }

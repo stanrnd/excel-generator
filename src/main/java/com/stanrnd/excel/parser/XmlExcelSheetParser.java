@@ -25,7 +25,7 @@ import com.stanrnd.excel.meta.ExcelHeader;
 import com.stanrnd.excel.meta.ExcelSheet;
 import com.stanrnd.excel.meta.ExcelStyle;
 import com.stanrnd.excel.meta.ExcelTitle;
-import com.stanrnd.excel.meta.FontName;
+import com.stanrnd.excel.meta.FillPattern;
 import com.stanrnd.excel.meta.FontSize;
 import com.stanrnd.excel.parser.bean.FieldValueParser;
 import com.stanrnd.excel.parser.bean.MethodValueParser;
@@ -50,12 +50,14 @@ public class XmlExcelSheetParser {
 				}
 			}
 			return excelSheets;
+		} catch (ExcelParserException e) {
+			throw e;
 		} catch (Exception e) {
 			throw new ExcelParserException(e);
 		}
 	}
 
-	private static ExcelSheet parseSheet(Element excel, Class<?> clazz) {
+	private static ExcelSheet parseSheet(Element excel, Class<?> clazz) throws ExcelParserException {
 		Map<String, ValueParser> valueParsers = parseValueParsers(clazz);
 		ExcelSheet excelSheet = new ExcelSheet(excel.getAttribute("name"));
 		NodeList sheetChilds = excel.getChildNodes();
@@ -69,7 +71,7 @@ public class XmlExcelSheetParser {
 				for (int l = 0; l < columns.getLength(); l++) {
 					Node column = columns.item(l);
 					if(column instanceof Element) {
-						excelColumns.add(parseExcelColumn((Element) column, valueParsers));
+						excelColumns.add(parseExcelColumn(clazz, (Element) column, valueParsers));
 					}
 				}
 				excelSheet.setColumns(excelColumns);
@@ -104,49 +106,60 @@ public class XmlExcelSheetParser {
 		return excelTitle;
 	}
 	
-	private static ExcelColumn parseExcelColumn(Element column, Map<String, ValueParser> valueParsers) {
-		try {
-			ExcelColumn excelColumn = new ExcelColumn();
+	private static ExcelColumn parseExcelColumn(Class<?> clazz, Element column, Map<String, ValueParser> valueParsers) throws ExcelParserException {
+		ExcelColumn excelColumn = new ExcelColumn();
+		if(!column.hasAttribute("field-name") && !column.hasAttribute("method-name")) {
+			throw new ExcelParserException("Attribute either 'field-name' or 'method-name' mandatory.");
+		}
+		if(column.hasAttribute("field-name")) {
+			if(!valueParsers.containsKey(column.getAttribute("field-name").toUpperCase())) {
+				throw new ExcelParserException("Field '" + column.getAttribute("field-name") + "' not found in the bean '" + clazz.getName() + "'.");
+			}
+			excelColumn.setValueParser(valueParsers.get(column.getAttribute("field-name").toUpperCase()));
+		}
+		if(column.hasAttribute("method-name")) {
+			if(!valueParsers.containsKey("GET" + column.getAttribute("method-name").toUpperCase())) {
+				throw new ExcelParserException("Method '" + column.getAttribute("method-name") + "' not found in the bean '" + clazz.getName() + "'.");
+			}
+			excelColumn.setValueParser(valueParsers.get("GET" + column.getAttribute("method-name").toUpperCase()));
+		}
+		if(column.hasAttribute("width")) {
+			excelColumn.setWidth(Integer.parseInt(column.getAttribute("width")));
+		}
+		if(column.hasAttribute("order")) {
+			excelColumn.setOrder(Integer.parseInt(column.getAttribute("order")));
+		}
+		NodeList columnChilds = column.getChildNodes();
+		for (int l = 0; l < columnChilds.getLength(); l++) {
+			Node columnChild = columnChilds.item(l);
+			if(columnChild instanceof Element) {
+				if ("HEADER".equalsIgnoreCase(columnChild.getNodeName())) {
+					excelColumn.setHeader(parseExcelHeader((Element) columnChild));
+				} else if ("DATA".equalsIgnoreCase(columnChild.getNodeName())) {
+					excelColumn.setData(parseExcelData((Element) columnChild));
+				}
+			}
+		}
+		
+		if(excelColumn.getHeader() == null) {
+			ExcelHeader excelHeader = new ExcelHeader();
 			if(column.hasAttribute("field-name")) {
-				excelColumn.setValueParser(valueParsers.get(column.getAttribute("field-name").toUpperCase()));
+				excelHeader.setText(column.getAttribute("field-name"));
 			}
 			if(column.hasAttribute("method-name")) {
-				excelColumn.setValueParser(valueParsers.get(column.getAttribute("method-name").toUpperCase()));
-			}
-			if(column.hasAttribute("width")) {
-				excelColumn.setWidth(Integer.parseInt(column.getAttribute("width")));
-			}
-			if(column.hasAttribute("order")) {
-				excelColumn.setOrder(Integer.parseInt(column.getAttribute("order")));
-			}
-			NodeList columnChilds = column.getChildNodes();
-			for (int l = 0; l < columnChilds.getLength(); l++) {
-				Node columnChild = columnChilds.item(l);
-				if(columnChild instanceof Element) {
-					if ("HEADER".equalsIgnoreCase(columnChild.getNodeName())) {
-						excelColumn.setHeader(parseExcelHeader((Element) columnChild));
-					} else if ("DATA".equalsIgnoreCase(columnChild.getNodeName())) {
-						excelColumn.setData(parseExcelData((Element) columnChild));
-					}
-				}
+				excelHeader.setText(column.getAttribute("method-name"));
 			}
 			
-			if(excelColumn.getHeader() == null) {
-				ExcelHeader excelHeader = new ExcelHeader();
-				if(column.hasAttribute("field-name")) {
-					excelHeader.setText(column.getAttribute("field-name"));
-				}
-				if(column.hasAttribute("method-name")) {
-					excelHeader.setText(column.getAttribute("method-name"));
-				}
-				
-				excelColumn.setHeader(excelHeader);
-			}
-			
-			return excelColumn;
-		} catch (Exception e) {
-			throw new RuntimeException(e);
+			excelColumn.setHeader(excelHeader);
 		}
+		
+		if(excelColumn.getData() == null) {
+			ExcelData excelData = new ExcelData();
+			
+			excelColumn.setData(excelData);
+		}
+		
+		return excelColumn;
 	}
 	
 	private static ExcelData parseExcelData(Element data) {
@@ -171,23 +184,31 @@ public class XmlExcelSheetParser {
 	
 	private static void parseExcelStyle(Element title, ExcelStyle excelStyle) {
 		if(title.hasAttribute("height")) {
-			excelStyle.setHeight(Integer.parseInt(title.getAttribute("height")));
+			excelStyle.setHeight(Short.parseShort(title.getAttribute("height")));
 		}
 		
-		if(title.hasAttribute("foreground")) {
-			excelStyle.setForeground(Color.valueOf(title.getAttribute("foreground")));
+		if(title.hasAttribute("fill-pattern")) {
+			excelStyle.setFillPattern(FillPattern.valueOf(title.getAttribute("fill-pattern").toUpperCase()));
 		}
 		
-		if(title.hasAttribute("background")) {
-			excelStyle.setBackground(Color.valueOf(title.getAttribute("background")));
+		if(title.hasAttribute("fill-foreground")) {
+			excelStyle.setFillForeground(Color.valueOf(title.getAttribute("fill-foreground").toUpperCase()));
+		}
+		
+		if(title.hasAttribute("fill-background")) {
+			excelStyle.setFillBackground(Color.valueOf(title.getAttribute("fill-background").toUpperCase()));
 		}
 		
 		if(title.hasAttribute("font-name")) {
-			excelStyle.setFontName(FontName.valueOf(title.getAttribute("font-name")));
+			excelStyle.setFontName(title.getAttribute("font-name"));
 		}
 		
 		if(title.hasAttribute("font-size")) {
-			excelStyle.setFontSize(FontSize.find(Integer.parseInt(title.getAttribute("font-size"))));
+			excelStyle.setFontSize(FontSize.find(Short.parseShort(title.getAttribute("font-size"))));
+		}
+		
+		if(title.hasAttribute("font-color")) {
+			excelStyle.setFontColor(Color.valueOf(title.getAttribute("font-color").toUpperCase()));
 		}
 		
 		if(title.hasAttribute("italic")) {
@@ -196,6 +217,10 @@ public class XmlExcelSheetParser {
 		
 		if(title.hasAttribute("bold")) {
 			excelStyle.setBold(Boolean.parseBoolean(title.getAttribute("bold")));
+		}
+		
+		if(title.hasAttribute("underline")) {
+			excelStyle.setUnderline(Byte.parseByte(title.getAttribute("underline")));
 		}
 	}
 

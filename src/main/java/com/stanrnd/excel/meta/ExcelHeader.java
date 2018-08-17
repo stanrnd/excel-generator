@@ -13,23 +13,27 @@ public class ExcelHeader extends ExcelStyle {
 	
 	public ExcelHeader() {
 		this.text = "";
-		this.foreground = Color.BLACK;
-		this.background = Color.WHITE;
+		this.fillForeground = Color.BLACK;
+		this.fillBackground = Color.WHITE;
+		this.fillPattern = FillPattern.NO_FILL;
 		this.bold = true;
-		this.fontName = FontName.ARIAL;
-		this.fontSize = FontSize.FIVE;
+		this.fontName = "Calibri";
+		this.fontSize = FontSize.EIGHT;
+		this.fontColor = Color.BLACK;
 		this.height = 0;
-		this.italic = true;
-		this.underline = false;
+		this.italic = false;
+		this.underline = 0;
 	}
 
 	public ExcelHeader(Header header) {
 		this.text = header.value();
-		this.background = header.background();
+		this.fillForeground = header.fillForeground();
+		this.fillBackground = header.fillBackground();
+		this.fillPattern = header.fillPattern();
 		this.bold = header.bold();
 		this.fontName = header.fontName();
 		this.fontSize = header.fontSize();
-		this.foreground = header.foreground();
+		this.fontColor = header.fontColor();
 		this.height = header.height();
 		this.italic = header.italic();
 		this.underline = header.underline();

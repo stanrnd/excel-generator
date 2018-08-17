@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="https://github.com/stanrnd/excel-generator" xmlns="https://github.com/stanrnd/excel-generator"
+	elementFormDefault="qualified">
+
+	<xs:element name="sheets">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="sheet" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="sheet">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" ref="title" />
+				<xs:element ref="columns" />
+			</xs:sequence>
+			<xs:attribute name="class" use="required" type="xs:NCName" />
+			<xs:attribute name="name" use="required" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:simpleType name="colorType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="BLACK" />
+			<xs:enumeration value="WHITE" />
+			<xs:enumeration value="RED" />
+			<xs:enumeration value="BRIGHT_GREEN" />
+			<xs:enumeration value="BLUE" />
+			<xs:enumeration value="YELLOW" />
+			<xs:enumeration value="PINK" />
+			<xs:enumeration value="TURQUOISE" />
+			<xs:enumeration value="DARK_RED" />
+			<xs:enumeration value="GREEN" />
+			<xs:enumeration value="DARK_BLUE" />
+			<xs:enumeration value="DARK_YELLOW" />
+			<xs:enumeration value="VIOLET" />
+			<xs:enumeration value="TEAL" />
+			<xs:enumeration value="GREY_25_PERCENT" />
+			<xs:enumeration value="GREY_50_PERCENT" />
+			<xs:enumeration value="CORNFLOWER_BLUE" />
+			<xs:enumeration value="MAROON" />
+			<xs:enumeration value="LEMON_CHIFFON" />
+			<xs:enumeration value="LIGHT_TURQUOISE1" />
+			<xs:enumeration value="ORCHID" />
+			<xs:enumeration value="CORAL" />
+			<xs:enumeration value="ROYAL_BLUE" />
+			<xs:enumeration value="LIGHT_CORNFLOWER_BLUE" />
+			<xs:enumeration value="SKY_BLUE" />
+			<xs:enumeration value="LIGHT_TURQUOISE" />
+			<xs:enumeration value="LIGHT_GREEN" />
+			<xs:enumeration value="LIGHT_YELLOW" />
+			<xs:enumeration value="PALE_BLUE" />
+			<xs:enumeration value="ROSE" />
+			<xs:enumeration value="LAVENDER" />
+			<xs:enumeration value="TAN" />
+			<xs:enumeration value="LIGHT_BLUE" />
+			<xs:enumeration value="AQUA" />
+			<xs:enumeration value="LIME" />
+			<xs:enumeration value="GOLD" />
+			<xs:enumeration value="LIGHT_ORANGE" />
+			<xs:enumeration value="ORANGE" />
+			<xs:enumeration value="BLUE_GREY" />
+			<xs:enumeration value="GREY_40_PERCENT" />
+			<xs:enumeration value="DARK_TEAL" />
+			<xs:enumeration value="SEA_GREEN" />
+			<xs:enumeration value="DARK_GREEN" />
+			<xs:enumeration value="OLIVE_GREEN" />
+			<xs:enumeration value="BROWN" />
+			<xs:enumeration value="PLUM" />
+			<xs:enumeration value="INDIGO" />
+			<xs:enumeration value="GREY_80_PERCENT" />
+			<xs:enumeration value="AUTOMATIC" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="fillPatternType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NO_FILL" />
+			<xs:enumeration value="SOLID_FOREGROUND" />
+			<xs:enumeration value="FINE_DOTS" />
+			<xs:enumeration value="ALT_BARS" />
+			<xs:enumeration value="SPARSE_DOTS" />
+			<xs:enumeration value="THICK_HORZ_BANDS" />
+			<xs:enumeration value="THICK_VERT_BANDS" />
+			<xs:enumeration value="THICK_BACKWARD_DIAG" />
+			<xs:enumeration value="THICK_FORWARD_DIAG" />
+			<xs:enumeration value="BIG_SPOTS" />
+			<xs:enumeration value="BRICKS" />
+			<xs:enumeration value="THIN_HORZ_BANDS" />
+			<xs:enumeration value="THIN_VERT_BANDS" />
+			<xs:enumeration value="THIN_BACKWARD_DIAG" />
+			<xs:enumeration value="THIN_FORWARD_DIAG" />
+			<xs:enumeration value="SQUARES" />
+			<xs:enumeration value="DIAMONDS" />
+			<xs:enumeration value="LESS_DOTS" />
+			<xs:enumeration value="LEAST_DOTS" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="fontSizeType">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1" />
+			<xs:maxInclusive value="20" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="title">
+		<xs:complexType>
+			<xs:attribute name="bold" type="xs:boolean" />
+			<xs:attribute name="fill-background" type="colorType" />
+			<xs:attribute name="fill-foreground" type="colorType" />
+			<xs:attribute name="fill-pattern" type="fillPatternType" />
+			<xs:attribute name="font-color" type="colorType" />
+			<xs:attribute name="font-name" type="xs:NCName" />
+			<xs:attribute name="font-size" type="fontSizeType" />
+			<xs:attribute name="height" type="xs:integer" />
+			<xs:attribute name="italic" type="xs:boolean" />
+			<xs:attribute name="text" />
+			<xs:attribute name="underline" type="xs:integer" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="columns">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="column" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="column">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" ref="header" />
+				<xs:element minOccurs="0" ref="data" />
+			</xs:sequence>
+			<xs:attribute name="field-name" type="xs:NCName" />
+			<xs:attribute name="method-name" type="xs:NCName" />
+			<xs:attribute name="order" type="xs:integer" />
+			<xs:attribute name="width" type="xs:integer" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="header">
+		<xs:complexType>
+			<xs:attribute name="bold" type="xs:boolean" />
+			<xs:attribute name="fill-background" type="colorType" />
+			<xs:attribute name="fill-foreground" type="colorType" />
+			<xs:attribute name="fill-pattern" type="fillPatternType" />
+			<xs:attribute name="font-color" type="colorType" />
+			<xs:attribute name="font-name" type="xs:NCName" />
+			<xs:attribute name="font-size" type="fontSizeType" />
+			<xs:attribute name="height" type="xs:integer" />
+			<xs:attribute name="italic" type="xs:boolean" />
+			<xs:attribute name="text" type="xs:NCName" />
+			<xs:attribute name="underline" type="xs:integer" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="data">
+		<xs:complexType>
+			<xs:attribute name="bold" type="xs:boolean" />
+			<xs:attribute name="fill-background" type="colorType" />
+			<xs:attribute name="fill-foreground" type="colorType" />
+			<xs:attribute name="fill-pattern" type="fillPatternType" />
+			<xs:attribute name="font-color" type="colorType" />
+			<xs:attribute name="font-name" type="xs:NCName" />
+			<xs:attribute name="font-size" type="fontSizeType" />
+			<xs:attribute name="height" type="xs:integer" />
+			<xs:attribute name="italic" type="xs:boolean" />
+			<xs:attribute name="underline" type="xs:integer" />
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

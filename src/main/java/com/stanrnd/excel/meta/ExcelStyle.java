@@ -7,51 +7,63 @@ package com.stanrnd.excel.meta;
  */
 abstract public class ExcelStyle {
 	
-	protected int height;
+	protected short height;
 	
-	protected Color foreground;
+	protected Color fillForeground;
 	
-	protected Color background;
+	protected Color fillBackground;
 	
-	protected FontName fontName;
+	protected FillPattern fillPattern;
+	
+	protected String fontName;
 	
 	protected FontSize fontSize;
+	
+	protected Color fontColor;
 	
 	protected boolean italic;
 	
 	protected boolean bold;
 	
-	protected boolean underline;
+	protected byte underline;
 
-	public int getHeight() {
+	public short getHeight() {
 		return height;
 	}
 
-	public void setHeight(int height) {
+	public void setHeight(short height) {
 		this.height = height;
 	}
 
-	public Color getForeground() {
-		return foreground;
+	public Color getFillForeground() {
+		return fillForeground;
 	}
 
-	public void setForeground(Color foreground) {
-		this.foreground = foreground;
+	public void setFillForeground(Color fillForeground) {
+		this.fillForeground = fillForeground;
 	}
 
-	public Color getBackground() {
-		return background;
+	public Color getFillBackground() {
+		return fillBackground;
 	}
 
-	public void setBackground(Color background) {
-		this.background = background;
+	public void setFillBackground(Color fillBackground) {
+		this.fillBackground = fillBackground;
 	}
 
-	public FontName getFontName() {
+	public FillPattern getFillPattern() {
+		return fillPattern;
+	}
+
+	public void setFillPattern(FillPattern fillPattern) {
+		this.fillPattern = fillPattern;
+	}
+
+	public String getFontName() {
 		return fontName;
 	}
 
-	public void setFontName(FontName fontName) {
+	public void setFontName(String fontName) {
 		this.fontName = fontName;
 	}
 
@@ -61,6 +73,14 @@ abstract public class ExcelStyle {
 
 	public void setFontSize(FontSize fontSize) {
 		this.fontSize = fontSize;
+	}
+
+	public Color getFontColor() {
+		return fontColor;
+	}
+
+	public void setFontColor(Color fontColor) {
+		this.fontColor = fontColor;
 	}
 
 	public boolean isItalic() {
@@ -79,11 +99,11 @@ abstract public class ExcelStyle {
 		this.bold = bold;
 	}
 
-	public boolean isUnderline() {
+	public byte getUnderline() {
 		return underline;
 	}
 
-	public void setUnderline(boolean underline) {
+	public void setUnderline(byte underline) {
 		this.underline = underline;
 	}
 

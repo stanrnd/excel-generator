@@ -31,10 +31,15 @@ import com.stanrnd.excel.parser.bean.FieldValueParser;
 import com.stanrnd.excel.parser.bean.MethodValueParser;
 import com.stanrnd.excel.parser.bean.ValueParser;
 
+/**
+ * 
+ * @author stalin.jeyaraj
+ *
+ */
 public class XmlExcelSheetParser {
 
-	public static Map<Class<?>, ExcelSheet> parse() throws ExcelParserException {
-		try (InputStream inputStream = XmlExcelSheetParser.class.getResourceAsStream("/excel-config.xml")) {
+	public static Map<Class<?>, ExcelSheet> parse(InputStream inputStream) throws ExcelParserException {
+		try {
 			Map<Class<?>, ExcelSheet> excelSheets = new LinkedHashMap<>();
 			DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = builderFactory.newDocumentBuilder();

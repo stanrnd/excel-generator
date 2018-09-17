@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sheets xmlns="https://github.com/stanrnd/excel-generator"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://github.com/stanrnd/excel-generator https://github.com/stanrnd/excel-generator/raw/master/excel-config.xsd">
+
+	<sheet name="Employee Sheet" class="com.stanrnd.excel.xml.Employee">
+		<title text="Employee Details" height="500" fill-foreground="GREEN" fill-background="YELLOW" fill-pattern="SPARSE_DOTS" font-name="Calibri" font-size="20" font-color="GREEN" italic="true" bold="false" underline="10" />
+		<columns>
+			<column method-name="name" />
+			<column field-name="address" width="5000" order="2" />
+			<column field-name="dept" order="3">
+				<header text="Department"  />
+			</column>
+			<column field-name="salary">
+				<header text="Salary" height="500" fill-foreground="GREEN" fill-background="GREEN" fill-pattern="SPARSE_DOTS" font-name="Arial" font-size="10" font-color="RED" italic="true" bold="false" underline="10" />
+				<data height="500" fill-foreground="GREEN" fill-background="YELLOW" fill-pattern="SPARSE_DOTS" font-name="Arial" font-size="8" font-color="GREEN" italic="true" bold="false" underline="100" />
+			</column>
+		</columns>
+	</sheet>
+
+	<sheet name="Project Sheet" class="com.stanrnd.excel.xml.Project">
+		<columns>
+			<column field-name="name" />
+			<column field-name="technology" />
+			<column field-name="clients" />
+		</columns>
+	</sheet>
+
+</sheets>

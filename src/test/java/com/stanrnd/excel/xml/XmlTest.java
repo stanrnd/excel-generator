@@ -9,6 +9,11 @@ import com.stanrnd.excel.Sheet;
 import com.stanrnd.excel.Type;
 import com.stanrnd.excel.exception.ExcelException;
 
+/**
+ * 
+ * @author stalin.jeyaraj
+ *
+ */
 public class XmlTest {
 
 	public static void main(String[] args) throws ExcelException {
